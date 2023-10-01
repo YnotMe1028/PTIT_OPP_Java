@@ -1,33 +1,28 @@
+package java01;
+
 import java.util.Scanner;
 
 public class general {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int t = sc.nextInt(); // Đọc số lượng test case
-        sc.nextLine(); // Đọc kí tự xuống dòng sau số lượng test case
-
-        while (t-- > 0) {
-            String s = sc.nextLine();
-            System.out.println(check(s));
-        }
-        sc.close();
-    }
-
-    private static String check(String s) {
-        if (s.charAt(0) == '0') return "NO";
-        int deml = 0;
-
-        for (int i = 0; i < s.length(); ++i) {
-            if (Character.isDigit(s.charAt(i))) {
-                int digit = Character.getNumericValue(s.charAt(i));
-                deml += digit % 2;
-            } else {
-                return "INVALID";
-            }
-        }
-
-        if (Math.abs(s.length() - deml) < deml && (s.length() % 2 == 1)) return "YES";
-        else if (Math.abs(s.length() - deml) > deml && (s.length() % 2 == 0)) return "YES";
-        else return "NO";
-    }
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int t = Integer.parseInt(sc.nextLine());
+		while(t-- >0) {
+			String s = new String(sc.nextLine());
+			System.out.println(check(s));
+		}
+	}
+	private static String check(String s) {
+		int odd = 0;
+		for(int i=0;i<s.length();++i) {
+			if(Character.isDigit(s.charAt(i)) == true ) {
+				int cs = (int)s.charAt(i);
+				if(cs % 2 == 1) odd++;
+			}
+			else return "INVALID";
+		}
+		if(s.charAt(0) == '0') return "NO";
+		if((s.length()&1)==1 && odd > s.length()-odd) return "YES";
+		else if ((s.length()&1)==0 && odd < s.length()-odd) return "YES";
+		else return "NO";
+	}
 }
